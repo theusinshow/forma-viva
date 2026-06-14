@@ -1,9 +1,10 @@
 /**
  * Project content (fictitious — portfolio demo).
  *
- * Images use deterministic grayscale placeholders (picsum.photos) to keep the
- * editorial mood consistent without real assets. To use real photography, replace
- * each `src` with an optimized image URL/import — see docs/ai/CONTENT_PENDING.md.
+ * Images are real photography stored locally under `public/projetos/<slug>/`.
+ * Each project folder follows the convention `hero.jpg` + `01.jpg`, `02.jpg`…
+ * in gallery order. The `orientation` field drives the editorial layout, so it
+ * must match the real aspect of each file.
  */
 
 export type GalleryImage = {
@@ -31,9 +32,6 @@ export type Project = {
   gallery: GalleryImage[];
 };
 
-const ph = (seed: string, w: number, h: number) =>
-  `https://picsum.photos/seed/${seed}/${w}/${h}`;
-
 export const projects: Project[] = [
   {
     slug: 'casa-horizonte',
@@ -44,23 +42,26 @@ export const projects: Project[] = [
     area: '320 m²',
     service: 'Arquitetura + Interiores',
     status: 'Conceito fictício para portfólio',
-    summary: 'Luz natural, concreto aparente e aberturas generosas para a paisagem.',
+    summary: 'Telhado-jardim, madeira e tela metálica para uma casa que se abre ao horizonte.',
     concept: [
-      'A Casa Horizonte nasce da relação entre luz natural, concreto aparente e aberturas generosas para a paisagem.',
-      'O projeto busca criar uma experiência de moradia silenciosa, onde os espaços se conectam sem perder intimidade.',
+      'A Casa Horizonte ocupa um lote em aclive e organiza-se em torno de um pátio com piscina, protegido por um volume suspenso de madeira e tela metálica.',
+      'O telhado-jardim integra a arquitetura à encosta, enquanto as aberturas generosas conduzem o olhar para a paisagem ao entardecer.',
     ],
     materiality: {
-      text: 'A materialidade foi pensada para criar continuidade entre interior e exterior, equilibrando textura, luz e permanência.',
-      materials: ['Concreto', 'Madeira', 'Vidro', 'Luz natural'],
+      text: 'Concreto, madeira e tela metálica convivem com o verde do telhado-jardim, equilibrando peso, filtro de luz e continuidade com o terreno.',
+      materials: ['Concreto', 'Madeira', 'Tela metálica', 'Telhado-jardim'],
     },
-    hero: { src: ph('horizonte-hero', 2400, 1350), alt: 'Fachada da Casa Horizonte ao entardecer', orientation: 'landscape' },
+    hero: {
+      src: '/projetos/casa-horizonte/hero.jpg',
+      alt: 'Fachada da Casa Horizonte com telhado-jardim ao entardecer',
+      orientation: 'landscape',
+    },
     gallery: [
-      { src: ph('horizonte-1', 2000, 1333), alt: 'Vista externa da Casa Horizonte', orientation: 'landscape' },
-      { src: ph('horizonte-2', 1200, 1600), alt: 'Sala de estar com pé-direito duplo', orientation: 'portrait' },
-      { src: ph('horizonte-3', 1600, 1600), alt: 'Detalhe do concreto aparente', orientation: 'square' },
-      { src: ph('horizonte-4', 2000, 1333), alt: 'Integração entre cozinha e jardim', orientation: 'landscape' },
-      { src: ph('horizonte-5', 1200, 1600), alt: 'Suíte com abertura para a paisagem', orientation: 'portrait' },
-      { src: ph('horizonte-6', 2000, 1333), alt: 'Área externa ao anoitecer', orientation: 'landscape' },
+      { src: '/projetos/casa-horizonte/01.jpg', alt: 'Pátio interno com piscina e estrutura de madeira', orientation: 'landscape' },
+      { src: '/projetos/casa-horizonte/02.jpg', alt: 'Volume envidraçado visto do telhado-jardim', orientation: 'landscape' },
+      { src: '/projetos/casa-horizonte/03.jpg', alt: 'Fachada em tela metálica ao pôr do sol', orientation: 'portrait' },
+      { src: '/projetos/casa-horizonte/04.jpg', alt: 'Espelho d’água sob a pérgola de madeira', orientation: 'portrait' },
+      { src: '/projetos/casa-horizonte/05.jpg', alt: 'Volume suspenso da casa visto da rua', orientation: 'landscape' },
     ],
   },
   {
@@ -72,113 +73,117 @@ export const projects: Project[] = [
     area: '140 m²',
     service: 'Interiores',
     status: 'Conceito fictício para portfólio',
-    summary: 'Interiores minimalistas, madeira clara e proporção.',
+    summary: 'Forro ripado de madeira, tons neutros e vegetação em interiores que respiram.',
     concept: [
-      'O Apartamento Linha parte de uma planta enxuta para criar interiores minimalistas, onde a madeira clara conduz a leitura dos ambientes.',
-      'Cada elemento foi reduzido ao essencial para preservar proporção, silêncio e continuidade visual.',
+      'O Apartamento Linha parte de um forro ripado de madeira que conduz a leitura dos ambientes e aquece a paleta neutra.',
+      'A varanda integrada e a vegetação trazem a paisagem para dentro, preservando proporção, silêncio e continuidade visual.',
     ],
     materiality: {
-      text: 'A paleta de materiais mantém calor e clareza: madeira clara, linho e tons neutros em superfícies contínuas.',
-      materials: ['Madeira clara', 'Linho', 'Pedra clara', 'Metal fosco'],
+      text: 'Madeira, linho e tons terrosos sustentam o calor dos interiores; o verde das plantas entra como material vivo do projeto.',
+      materials: ['Madeira', 'Linho', 'Tons terrosos', 'Vegetação'],
     },
-    hero: { src: ph('linha-hero', 2400, 1350), alt: 'Living do Apartamento Linha', orientation: 'landscape' },
+    hero: {
+      src: '/projetos/apartamento-linha/hero.jpg',
+      alt: 'Living integrado à varanda com vegetação no Apartamento Linha',
+      orientation: 'landscape',
+    },
     gallery: [
-      { src: ph('linha-1', 2000, 1333), alt: 'Estar integrado à sala de jantar', orientation: 'landscape' },
-      { src: ph('linha-2', 1200, 1600), alt: 'Detalhe de marcenaria em madeira clara', orientation: 'portrait' },
-      { src: ph('linha-3', 1600, 1600), alt: 'Cozinha minimalista', orientation: 'square' },
-      { src: ph('linha-4', 2000, 1333), alt: 'Quarto com luz difusa', orientation: 'landscape' },
-      { src: ph('linha-5', 1200, 1600), alt: 'Detalhe de iluminação', orientation: 'portrait' },
+      { src: '/projetos/apartamento-linha/01.jpg', alt: 'Estar com forro ripado de madeira e poltronas de couro', orientation: 'landscape' },
+      { src: '/projetos/apartamento-linha/02.jpg', alt: 'Sala de jantar sob o forro contínuo de madeira', orientation: 'landscape' },
+      { src: '/projetos/apartamento-linha/03.jpg', alt: 'Vegetação junto às aberturas envidraçadas', orientation: 'square' },
     ],
   },
   {
-    slug: 'casa-patio',
-    name: 'Casa Pátio',
+    slug: 'casa-mirante',
+    name: 'Casa Mirante',
     category: 'Residencial',
-    location: 'Garopaba, SC',
+    location: 'Florianópolis, SC',
     year: 2025,
-    area: '280 m²',
-    service: 'Arquitetura + Paisagismo',
+    area: '300 m²',
+    service: 'Arquitetura + Estrutura',
     status: 'Conceito fictício para portfólio',
-    summary: 'Integração entre jardim interno, luz e privacidade.',
+    summary: 'Uma estrutura de aço vermelho vence a encosta e abre a casa para o vale.',
     concept: [
-      'A Casa Pátio organiza-se em torno de um jardim interno que traz luz e ar para o centro da casa.',
-      'O pátio cria privacidade sem fechar a moradia, equilibrando recolhimento e abertura.',
+      'A Casa Mirante ocupa um terreno de forte declive e transforma a topografia em programa: uma estrutura de aço vermelho vence o desnível e conecta a rua à moradia.',
+      'Do alto, os ambientes se abrem para o vale; o aço aparente assume um gesto expressivo, em contraste com a vegetação da encosta.',
     ],
     materiality: {
-      text: 'Texturas brutas e vegetação convivem para sustentar a sensação de refúgio dentro do lote urbano.',
-      materials: ['Concreto', 'Vegetação', 'Pedra natural', 'Madeira'],
+      text: 'Aço aparente, concreto e madeira convivem com a vegetação nativa da encosta, equilibrando peso estrutural e leveza visual.',
+      materials: ['Aço aparente', 'Concreto', 'Madeira', 'Vidro'],
     },
-    hero: { src: ph('patio-hero', 2400, 1350), alt: 'Pátio interno da Casa Pátio', orientation: 'landscape' },
+    hero: {
+      src: '/projetos/casa-mirante/hero.jpg',
+      alt: 'Casa Mirante em encosta, com terraço voltado para o vale',
+      orientation: 'landscape',
+    },
     gallery: [
-      { src: ph('patio-1', 2000, 1333), alt: 'Jardim interno com luz zenital', orientation: 'landscape' },
-      { src: ph('patio-2', 1200, 1600), alt: 'Circulação ao redor do pátio', orientation: 'portrait' },
-      { src: ph('patio-3', 1600, 1600), alt: 'Detalhe de vegetação e pedra', orientation: 'square' },
-      { src: ph('patio-4', 2000, 1333), alt: 'Estar voltado para o pátio', orientation: 'landscape' },
-      { src: ph('patio-5', 1200, 1600), alt: 'Suíte com privacidade', orientation: 'portrait' },
+      { src: '/projetos/casa-mirante/01.jpg', alt: 'Implantação na encosta vista de cima', orientation: 'landscape' },
+      { src: '/projetos/casa-mirante/02.jpg', alt: 'Estar com escada e integração ao exterior', orientation: 'landscape' },
+      { src: '/projetos/casa-mirante/03.jpg', alt: 'Torre de elevador em aço vermelho na encosta', orientation: 'portrait' },
+      { src: '/projetos/casa-mirante/04.jpg', alt: 'Passarela de aço vista do alto', orientation: 'portrait' },
     ],
   },
   {
     slug: 'refugio-pedra',
     name: 'Refúgio Pedra',
-    category: 'Conceitos',
+    category: 'Residencial',
     location: 'Serra Catarinense, SC',
     year: 2025,
-    area: '210 m²',
-    service: 'Arquitetura (conceito)',
+    area: '240 m²',
+    service: 'Arquitetura + Interiores',
     status: 'Conceito fictício para portfólio',
-    summary: 'Arquitetura silenciosa, pedra natural e paisagem.',
+    summary: 'Pedra natural, madeira e telha cerâmica em uma casa de campo que respira permanência.',
     concept: [
-      'O Refúgio Pedra é um estudo de arquitetura silenciosa na serra, ancorado na pedra natural e na paisagem.',
-      'A construção busca desaparecer no terreno, oferecendo abrigo sem disputar com o entorno.',
+      'O Refúgio Pedra é uma casa de campo ancorada na pedra natural, onde alvenaria bruta, madeira e telha cerâmica constroem a sensação de permanência.',
+      'Os ambientes se abrem para a piscina e o jardim, equilibrando recolhimento e convívio sob amplos beirais.',
     ],
     materiality: {
-      text: 'A pedra local define estrutura e atmosfera; a luz entra de forma controlada para reforçar o recolhimento.',
-      materials: ['Pedra natural', 'Madeira escura', 'Vidro', 'Aço'],
+      text: 'A pedra local define estrutura e atmosfera; a madeira aquece os interiores e os beirais protegem do sol forte.',
+      materials: ['Pedra natural', 'Madeira', 'Telha cerâmica', 'Couro'],
     },
-    hero: { src: ph('pedra-hero', 2400, 1350), alt: 'Volume em pedra na paisagem da serra', orientation: 'landscape' },
+    hero: {
+      src: '/projetos/refugio-pedra/hero.jpg',
+      alt: 'Casa de pedra com piscina e telhado cerâmico no Refúgio Pedra',
+      orientation: 'landscape',
+    },
     gallery: [
-      { src: ph('pedra-1', 2000, 1333), alt: 'Implantação na encosta', orientation: 'landscape' },
-      { src: ph('pedra-2', 1200, 1600), alt: 'Detalhe da alvenaria de pedra', orientation: 'portrait' },
-      { src: ph('pedra-3', 1600, 1600), alt: 'Interior com luz controlada', orientation: 'square' },
-      { src: ph('pedra-4', 2000, 1333), alt: 'Vista para a paisagem da serra', orientation: 'landscape' },
+      { src: '/projetos/refugio-pedra/01.jpg', alt: 'Fachada em pedra natural com telha cerâmica', orientation: 'landscape' },
+      { src: '/projetos/refugio-pedra/02.jpg', alt: 'Estar com marcenaria de madeira e poltronas de couro', orientation: 'landscape' },
+      { src: '/projetos/refugio-pedra/03.jpg', alt: 'Varanda coberta com pilar de pedra junto à piscina', orientation: 'portrait' },
     ],
   },
   {
-    slug: 'studio-comercial-norte',
-    name: 'Studio Comercial Norte',
+    slug: 'edificio-rosadoce',
+    name: 'Edifício Rosadoce',
     category: 'Comercial',
     location: 'São José, SC',
     year: 2026,
-    area: '95 m²',
-    service: 'Arquitetura comercial + Interiores',
+    area: '420 m²',
+    service: 'Arquitetura comercial',
     status: 'Conceito fictício para portfólio',
-    summary: 'Espaço comercial compacto com linguagem premium.',
+    summary: 'Uma fachada-brise em terracota dá identidade a um comércio de rua.',
     concept: [
-      'O Studio Comercial Norte trata um espaço compacto com linguagem premium, otimizando fluxo e percepção de valor.',
-      'A composição usa poucos materiais e muita ordem para sustentar uma marca sofisticada.',
+      'O Edifício Rosadoce trata um comércio de rua a partir de uma fachada-brise em terracota, que filtra a luz e dá identidade ao volume.',
+      'Internamente, a estrutura de aço aparente organiza os pavimentos e deixa a luz coada desenhar os espaços ao longo do dia.',
     ],
     materiality: {
-      text: 'Superfícies contínuas e iluminação pontual constroem uma atmosfera precisa em poucos metros quadrados.',
-      materials: ['Microcimento', 'Metal', 'Vidro', 'Iluminação pontual'],
+      text: 'Concreto pigmentado, aço aparente e vidro compõem uma atmosfera precisa, em que cor e sombra se tornam materiais de projeto.',
+      materials: ['Concreto rosa', 'Aço aparente', 'Vidro', 'Brise'],
     },
-    hero: { src: ph('norte-hero', 2400, 1350), alt: 'Interior do Studio Comercial Norte', orientation: 'landscape' },
+    hero: {
+      src: '/projetos/edificio-rosadoce/hero.jpg',
+      alt: 'Fachada-brise em terracota do Edifício Rosadoce',
+      orientation: 'landscape',
+    },
     gallery: [
-      { src: ph('norte-1', 2000, 1333), alt: 'Área de atendimento', orientation: 'landscape' },
-      { src: ph('norte-2', 1200, 1600), alt: 'Detalhe de balcão em metal', orientation: 'portrait' },
-      { src: ph('norte-3', 1600, 1600), alt: 'Composição de iluminação', orientation: 'square' },
-      { src: ph('norte-4', 2000, 1333), alt: 'Vitrine e fachada', orientation: 'landscape' },
+      { src: '/projetos/edificio-rosadoce/01.jpg', alt: 'Estrutura de aço aparente e circulação vertical no interior', orientation: 'landscape' },
+      { src: '/projetos/edificio-rosadoce/02.jpg', alt: 'Luz filtrada pelo brise ao fundo da laje', orientation: 'landscape' },
+      { src: '/projetos/edificio-rosadoce/03.jpg', alt: 'Fachada-brise vista da esquina', orientation: 'portrait' },
     ],
   },
 ];
 
-export const categories = [
-  'Todos',
-  'Residencial',
-  'Interiores',
-  'Comercial',
-  'Reformas',
-  'Conceitos',
-] as const;
+export const categories = ['Todos', 'Residencial', 'Interiores', 'Comercial'] as const;
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);

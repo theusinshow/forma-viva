@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Frame from '@/components/Frame';
 import CtaLink from '@/components/CtaLink';
 import Reveal from '@/components/Reveal';
-import { projects } from '@/lib/projects';
+import { getProject, projects } from '@/lib/projects';
 
 export const metadata: Metadata = {
   title: 'Atelier',
@@ -20,12 +20,15 @@ const especialidades = [
 
 const valores = ['Escuta', 'Proporção', 'Materialidade', 'Clareza', 'Tempo', 'Precisão'];
 
+// Abertura usa um projeto distinto da Home (que abre com Casa Horizonte).
+const aberturaImage = (getProject('refugio-pedra') ?? projects[0]).hero;
+
 export default function AtelierPage() {
   return (
     <div className="pt-20">
       {/* Imagem grande de abertura */}
       <Frame
-        image={projects[0].gallery[0]}
+        image={aberturaImage}
         aspect="h-[70vh] w-full"
         sizes="100vw"
         priority

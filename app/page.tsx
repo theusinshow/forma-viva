@@ -81,7 +81,7 @@ export default function HomePage() {
             />
           </Reveal>
           <Reveal className="col-span-12 md:col-span-5 md:col-start-8">
-            <p className="eyebrow">O Atelier</p>
+            <h2 className="eyebrow">O Atelier</h2>
             <p className="mt-6 measure text-lg text-text/90">
               O Atelier Forma Viva desenvolve projetos residenciais e interiores com foco em
               proporção, materialidade e experiência espacial.

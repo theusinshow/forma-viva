@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Frame from '@/components/Frame';
 import type { Project } from '@/lib/projects';
 
@@ -14,14 +14,31 @@ type ProjectCardProps = {
 
 export default function ProjectCard({ project, priority, sizes }: ProjectCardProps) {
   const ref = useRef<HTMLAnchorElement>(null);
-  const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
+  const rectRef = useRef<DOMRect | null>(null);
+
+  // Desktop-only cursor label, positioned imperatively to avoid re-rendering
+  // the card on every pointer move.
+  const isCoarse = () =>
+    typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
+  const onEnter = () => {
+    if (isCoarse() || !ref.current || !labelRef.current) return;
+    rectRef.current = ref.current.getBoundingClientRect();
+    labelRef.current.style.opacity = '1';
+  };
 
   const onMove = (e: React.MouseEvent) => {
-    const el = ref.current;
-    if (!el) return;
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-    const rect = el.getBoundingClientRect();
-    setCursor({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    const label = labelRef.current;
+    const rect = rectRef.current;
+    if (!label || !rect) return;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    label.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+  };
+
+  const onLeave = () => {
+    if (labelRef.current) labelRef.current.style.opacity = '0';
   };
 
   return (
@@ -29,8 +46,9 @@ export default function ProjectCard({ project, priority, sizes }: ProjectCardPro
       ref={ref}
       href={`/projetos/${project.slug}`}
       className="group relative block"
+      onMouseEnter={onEnter}
       onMouseMove={onMove}
-      onMouseLeave={() => setCursor(null)}
+      onMouseLeave={onLeave}
     >
       <Frame
         image={project.hero}
@@ -39,16 +57,14 @@ export default function ProjectCard({ project, priority, sizes }: ProjectCardPro
         priority={priority}
         hover
       />
-      {/* Cursor label — desktop only */}
-      {cursor && (
-        <span
-          aria-hidden
-          className="pointer-events-none absolute z-10 hidden -translate-x-1/2 -translate-y-1/2 whitespace-nowrap bg-accent px-3 py-1.5 font-display text-[0.65rem] uppercase tracking-label text-primary-fg md:block"
-          style={{ left: cursor.x, top: cursor.y }}
-        >
-          Ver projeto
-        </span>
-      )}
+      {/* Cursor label — desktop only, hidden until hover */}
+      <span
+        ref={labelRef}
+        aria-hidden
+        className="pointer-events-none absolute left-0 top-0 z-10 hidden whitespace-nowrap bg-accent px-3 py-1.5 font-display text-[0.65rem] uppercase tracking-label text-primary-fg opacity-0 transition-opacity duration-200 ease-editorial md:block"
+      >
+        Ver projeto
+      </span>
 
       <div className="mt-4 flex items-baseline justify-between gap-4">
         <h3 className="font-display text-lg font-light tracking-tight text-text">

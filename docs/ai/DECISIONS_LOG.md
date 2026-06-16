@@ -64,3 +64,22 @@ Cada entrada: **Decisão** · **Why** · **Affects**.
 ### 2026-06-13 — Reveal on-scroll com IntersectionObserver (não GSAP ScrollTrigger)
 - **Why:** mais leve, sem dependência pesada para o reveal básico; conteúdo visível sem JS (SSR/no-JS safe) e respeita prefers-reduced-motion. GSAP fica disponível para motion mais elaborado se necessário.
 - **Affects:** MOTION_DIRECTION (Fase 05), componente Reveal.
+
+### 2026-06-16 — Correções do /impeccable audit (a11y, perf, theming)
+- **Why:** auditoria técnica apontou 11 issues (1 P1, 5 P2, 4 P3). Correções aplicadas sem alterar a direção visual:
+  - **Filtro de projetos:** `role="tablist/tab"` (padrão incorreto, sem tabpanel) → botões `aria-pressed` em `role="group"` + região `aria-live` com a contagem de resultados.
+  - **Menu mobile:** adicionados focus trap, fechar no `Escape`, restauração de foco no toggle e `inert` no `<main>`/`<footer>` enquanto aberto (`role="dialog"` + `aria-modal`).
+  - **Touch targets:** filtros, CTA ghost, toggle mobile e links do rodapé expandidos para ~44px via padding com margem negativa (sem deslocar o layout).
+  - **Hero:** scrim único trocado por dois scrims ancorados às zonas de texto (topo e base), mantendo o centro da foto limpo — protege contraste do rótulo superior sobre fotos claras.
+  - **ProjectCard:** label "Ver projeto" posicionado imperativamente via `ref` (sem `setState` por mousemove) — elimina re-render contínuo no hover.
+  - **Formulário de contato:** validação real antes do estado de sucesso, erros inline com `aria-invalid`/`aria-describedby`/`role="alert"`, indicadores de obrigatório e foco no primeiro campo inválido.
+  - **Tokens:** novos `--paper-ink` (#1A1A17) e `--danger` (#D98E80) substituem valores hard-coded em ProcessStep e nos estados de erro do form.
+  - **Semântica:** rótulos de seção (Conceito, Materialidade, Ficha técnica, O Atelier, Especialidades, Valores) promovidos de `<p>` para `<h2>` (mantendo a classe `.eyebrow`); ano do rodapé via `getFullYear()`.
+- **Affects:** components/{ProjectsGallery,Navbar,CtaLink,Footer,Hero,ProjectCard,ContactForm,ProcessStep}.tsx, app/{page,atelier/page,projetos/[slug]/page}.tsx, app/globals.css, tailwind.config.ts. Build limpo (15 páginas, tsc 0 erros).
+
+### 2026-06-16 — Polimento pós-audit: rumo a 20/20 (perf + responsivo + a11y)
+- **Why:** segundo `/impeccable audit` (19/20) restaram 3 P3. Resolvidos:
+  - **Frame (perf):** removida a animação de `filter` (saturate/brightness) no hover — era repaint por frame em imagens grandes (ex. NextProjectBlock 70vh). Agora anima só `transform` (`transform-gpu` + `will-change-transform`) e o "recuo em repouso → realce no hover" vem de um overlay `bg-bg/20` com fade de **opacidade** (composto na GPU). Novo prop `dimAtRest` (default `true`); NextProjectBlock passa `dimAtRest={false}` por já ter overlay próprio. Mantém a intenção do registro de 2026-06-13 (dessaturado→pleno) por outro mecanismo; leve mudança no clima de repouso (escurece em vez de dessaturar).
+  - **Contato (responsivo):** links de e-mail/WhatsApp/Instagram com `py-2` (alvo ~44px), `gap-3`→`gap-1` para preservar o ritmo.
+  - **Menu mobile (a11y):** o toggle "Fechar" (no header, fora do dialog) entrou no conjunto do focus trap, então é alcançável por Tab além do Escape.
+- **Affects:** components/{Frame,NextProjectBlock,Navbar}.tsx, app/contato/page.tsx. Build limpo (15 páginas, tsc 0 erros), bundles inalterados.

@@ -33,8 +33,15 @@ export default function Hero({
         blurDataURL={DARK_BLUR}
         className="object-cover"
       />
-      {/* Legibility gradient — bottom and top */}
-      <div className="absolute inset-0 bg-gradient-to-t from-bg/70 via-bg/10 to-bg/30" />
+      {/* Legibility scrims — anchored to the text zones, photo center stays clear */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-bg/80 via-bg/25 to-transparent"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-bg/55 to-transparent"
+      />
 
       {cornerTopLeft && (
         <div className="absolute left-6 top-24 z-10 md:left-10 md:top-28">{cornerTopLeft}</div>

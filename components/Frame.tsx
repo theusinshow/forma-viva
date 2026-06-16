@@ -10,6 +10,9 @@ type FrameProps = {
   className?: string;
   /** Subtle hover zoom (used on interactive cards). */
   hover?: boolean;
+  /** Dim the image at rest and lift it on hover. On by default with `hover`;
+   *  disable where the parent manages its own overlay (e.g. NextProjectBlock). */
+  dimAtRest?: boolean;
 };
 
 const aspectByOrientation: Record<GalleryImage['orientation'], string> = {
@@ -29,6 +32,7 @@ export default function Frame({
   priority = false,
   className = '',
   hover = false,
+  dimAtRest = true,
 }: FrameProps) {
   return (
     <div
@@ -46,10 +50,18 @@ export default function Frame({
         blurDataURL={DARK_BLUR}
         className={`object-cover ${
           hover
-            ? 'saturate-[.6] brightness-[.92] transition duration-700 ease-editorial group-hover:scale-[1.03] group-hover:saturate-100 group-hover:brightness-100'
+            ? 'transform-gpu transition-transform duration-700 ease-editorial will-change-transform group-hover:scale-[1.03]'
             : ''
         }`}
       />
+      {/* Rest dim that lifts on hover. Opacity-only so it composites on the GPU
+          (no per-frame filter repaint). */}
+      {hover && dimAtRest && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-bg/20 opacity-100 transition-opacity duration-700 ease-editorial group-hover:opacity-0"
+        />
+      )}
     </div>
   );
 }

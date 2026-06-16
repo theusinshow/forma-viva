@@ -18,6 +18,8 @@ const config: Config = {
         primary: { DEFAULT: 'var(--primary)', fg: 'var(--primary-fg)' },
         accent: 'var(--accent)',
         paper: 'var(--paper)',
+        'paper-ink': 'var(--paper-ink)',
+        danger: 'var(--danger)',
       },
       fontFamily: {
         display: ['var(--font-raleway)', 'ui-sans-serif', 'system-ui', 'sans-serif'],

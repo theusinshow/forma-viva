@@ -26,7 +26,7 @@ export default function CtaLink({
   const styles =
     variant === 'solid'
       ? 'bg-accent px-6 py-3 text-primary-fg hover:bg-text'
-      : 'text-text hover:text-accent';
+      : '-my-2 py-2 text-text hover:text-accent';
 
   return (
     <Link href={href} className={`${base} ${styles} ${className}`} {...rest}>

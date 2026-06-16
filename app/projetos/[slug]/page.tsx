@@ -56,7 +56,7 @@ export default function ProjetoPage({ params }: { params: { slug: string } }) {
       <section id="conceito" className="px-6 py-28 md:px-10 md:py-40">
         <div className="mx-auto grid max-w-container grid-cols-12 gap-10">
           <Reveal className="col-span-12 md:col-span-7">
-            <p className="eyebrow">Conceito</p>
+            <h2 className="eyebrow">Conceito</h2>
             <div className="mt-6 flex max-w-2xl flex-col gap-5 text-lg text-text/90">
               {project.concept.map((p, i) => (
                 <p key={i}>{p}</p>
@@ -64,7 +64,7 @@ export default function ProjetoPage({ params }: { params: { slug: string } }) {
             </div>
           </Reveal>
           <Reveal className="col-span-12 md:col-span-4 md:col-start-9">
-            <p className="eyebrow mb-6">Ficha técnica</p>
+            <h2 className="eyebrow mb-6">Ficha técnica</h2>
             <FichaTecnica project={project} />
           </Reveal>
         </div>
@@ -81,7 +81,7 @@ export default function ProjetoPage({ params }: { params: { slug: string } }) {
       <section className="px-6 py-28 md:px-10 md:py-40">
         <div className="mx-auto grid max-w-container grid-cols-12 gap-10">
           <Reveal className="col-span-12 md:col-span-5">
-            <p className="eyebrow">Materialidade</p>
+            <h2 className="eyebrow">Materialidade</h2>
             <p className="mt-6 measure text-lg text-text/90">{project.materiality.text}</p>
           </Reveal>
           <Reveal className="col-span-12 md:col-span-6 md:col-start-7">

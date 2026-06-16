@@ -15,20 +15,19 @@ export default function ProjectsGallery() {
     <div>
       {/* Filters */}
       <div
-        role="tablist"
+        role="group"
         aria-label="Filtrar por categoria"
-        className="flex flex-wrap gap-x-6 gap-y-3 border-b border-border pb-6"
+        className="flex flex-wrap gap-x-2 gap-y-1 border-b border-border pb-5"
       >
         {categories.map((cat) => {
           const selected = cat === active;
           return (
             <button
               key={cat}
-              role="tab"
-              aria-selected={selected}
               type="button"
+              aria-pressed={selected}
               onClick={() => setActive(cat)}
-              className={`font-display text-xs uppercase tracking-label transition-colors duration-300 ${
+              className={`-my-1 px-1 py-3 font-display text-xs uppercase tracking-label transition-colors duration-300 ${
                 selected ? 'text-accent' : 'text-muted hover:text-text'
               }`}
             >
@@ -37,6 +36,12 @@ export default function ProjectsGallery() {
           );
         })}
       </div>
+
+      <p className="sr-only" role="status" aria-live="polite">
+        {filtered.length}{' '}
+        {filtered.length === 1 ? 'projeto' : 'projetos'}
+        {active !== 'Todos' ? ` em ${active}` : ''}.
+      </p>
 
       {/* Asymmetric editorial grid */}
       <div className="mt-12 grid grid-cols-1 gap-x-6 gap-y-16 md:mt-20 md:grid-cols-2 md:gap-y-28">

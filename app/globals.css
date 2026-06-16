@@ -13,6 +13,8 @@
   --primary-fg: #0e0e0d;
   --accent: #a3aa7e;
   --paper: #f5f2ed;
+  --paper-ink: #1a1a17; /* ink for the light "respiro" section */
+  --danger: #d98e80; /* warm error tone, legible on dark bg */
   --radius: 2px;
   --container: 1440px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);

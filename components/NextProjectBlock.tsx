@@ -11,6 +11,7 @@ export default function NextProjectBlock({ project }: { project: Project }) {
         className="!aspect-auto h-full"
         sizes="100vw"
         hover
+        dimAtRest={false}
       />
       <div className="absolute inset-0 bg-bg/40 transition-colors duration-700 ease-editorial group-hover:bg-bg/25" />
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">

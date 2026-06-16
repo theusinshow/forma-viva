@@ -24,7 +24,7 @@ export default function ProcessStep({
   return (
     <section
       className={`flex min-h-[80vh] items-center px-6 py-24 md:px-10 ${
-        paper ? 'bg-paper text-[#1a1a17]' : ''
+        paper ? 'bg-paper text-paper-ink' : ''
       }`}
     >
       <div
@@ -37,7 +37,7 @@ export default function ProcessStep({
         >
           <span
             className={`font-display text-[5rem] font-extralight leading-none md:text-[8rem] ${
-              paper ? 'text-[#1a1a17]/20' : 'text-text/15'
+              paper ? 'text-paper-ink/20' : 'text-text/15'
             }`}
           >
             {number}
@@ -45,7 +45,7 @@ export default function ProcessStep({
           <h2 className="mt-4 font-display text-3xl font-light tracking-tight md:text-4xl">
             {title}
           </h2>
-          <p className={`mt-6 measure ${paper ? 'text-[#1a1a17]/70' : 'text-muted'}`}>
+          <p className={`mt-6 measure ${paper ? 'text-paper-ink/70' : 'text-muted'}`}>
             {text}
           </p>
         </Reveal>

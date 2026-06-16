@@ -39,7 +39,7 @@ export default function AtelierPage() {
           {/* Texto institucional */}
           <section className="grid grid-cols-12 gap-10 py-28 md:py-40">
             <Reveal className="col-span-12 md:col-span-3">
-              <p className="eyebrow">O Atelier</p>
+              <h2 className="eyebrow">O Atelier</h2>
             </Reveal>
             <Reveal className="col-span-12 md:col-span-8">
               <p className="font-display text-2xl font-light leading-snug tracking-tight md:text-3xl">
@@ -57,7 +57,7 @@ export default function AtelierPage() {
           {/* Especialidades */}
           <section className="grid grid-cols-12 gap-10 border-t border-border py-20 md:py-28">
             <Reveal className="col-span-12 md:col-span-3">
-              <p className="eyebrow">Especialidades</p>
+              <h2 className="eyebrow">Especialidades</h2>
             </Reveal>
             <Reveal className="col-span-12 md:col-span-8">
               <ul className="flex flex-col">
@@ -76,7 +76,7 @@ export default function AtelierPage() {
           {/* Valores */}
           <section className="grid grid-cols-12 gap-10 border-t border-border py-20 md:py-28">
             <Reveal className="col-span-12 md:col-span-3">
-              <p className="eyebrow">Valores</p>
+              <h2 className="eyebrow">Valores</h2>
             </Reveal>
             <Reveal className="col-span-12 md:col-span-8">
               <ul className="flex flex-wrap gap-x-10 gap-y-4">

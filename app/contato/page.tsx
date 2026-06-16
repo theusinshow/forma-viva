@@ -28,10 +28,10 @@ export default function ContatoPage() {
         <div className="mt-20 grid grid-cols-12 gap-12 md:mt-28">
           {/* Canais + formulário */}
           <div className="col-span-12 md:col-span-7">
-            <div className="mb-12 flex flex-col gap-3">
+            <div className="mb-10 flex flex-col gap-1">
               <a
                 href={`mailto:${site.contact.email}`}
-                className="link-underline w-fit text-lg text-text"
+                className="link-underline w-fit py-2 text-lg text-text"
               >
                 {site.contact.email}
               </a>
@@ -39,7 +39,7 @@ export default function ContatoPage() {
                 href={site.contact.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
-                className="link-underline w-fit text-lg text-text"
+                className="link-underline w-fit py-2 text-lg text-text"
               >
                 WhatsApp — {site.contact.whatsapp}
               </a>
@@ -47,7 +47,7 @@ export default function ContatoPage() {
                 href={site.contact.instagramHref}
                 target="_blank"
                 rel="noreferrer"
-                className="link-underline w-fit text-lg text-text"
+                className="link-underline w-fit py-2 text-lg text-text"
               >
                 {site.contact.instagram}
               </a>
